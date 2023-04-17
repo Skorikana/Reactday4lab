@@ -1,0 +1,25 @@
+.nav {
+  display: flex;
+ text-align: center;
+}
+body{
+  background-color:lightblue;
+}
+.title{
+  text-align:center;
+  background-color: black;
+color:white;
+  padding: 15px;
+  font-size: 2em;
+}
+.starship1{
+  margin-top: 9%;
+  margin-left:5%;
+  border-radius:10px;
+  display:inline-block;
+  background-color:green;
+  justify-content:space-around;
+   width:18%;
+  height:70px;
+  text-align:center;
+}
