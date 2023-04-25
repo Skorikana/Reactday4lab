@@ -1,24 +1,34 @@
-import {useState, useEffect} from "react";
 import './App.css';
-import Starshipcard from "./Components/Starshipcard";
-import getAllStarships from "./Services/Sw-api";
-import Nav from "./Components/Nav";
+import getStarShips from  "./Services/Sw-api";
+import {useState,useEffect} from "react";
+import StarShipCard from "./Components/Starshipcard"
 
-export default function App() {
-  const[starShips, setStarShips] = useState("")
+function App() {
+  const [starShips, setStarShips] = useState(null);
+    
+  useEffect(() => {
+    getStarShips().then(res =>{
+      setStarShips(res.results);
+    })
+    
+    }, []);
 
-  useEffect(() =>{
-    getAllStarships()
-    //.then() method schedules callback functions for the eventual completion of a Promise — either fulfillment or rejection.
-    .then(ships => {setStarShips(ships)});
-      },[])
+    //console.log(starShips);
+
+   const loaded = () => {
+       if(starShips === null) {
+           getStarShips();
+       }
+   }
   return (
-     <div className="App">
-      <Nav/>
-            <Starshipcard  data = {starShips}/>
-           
+    <div className="App">
+      <div>
+      <h1>STAR WARS STARSHIPS</h1>
+      {starShips? starShips.map((ship, index) => {
+                   return <StarShipCard key={index} ship={ship}/> 
+                }) : loaded()}
+        </div>
     </div>
   );
-
-  }
-
+}
+export default App;
